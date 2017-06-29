@@ -2,8 +2,8 @@ package org.usfirst.frc.team2583.robot.commands;
 
 import org.usfirst.frc.team2583.robot.Robot;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -21,14 +21,15 @@ public class Drive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("Gears", Robot.dt.pot.get());
-    	double left = Robot.oi.x.getRawAxis(1) * 0.5;
-    	Robot.dt.runMotor(left);
+    	double leftSpeed  = Robot.oi.x.getY(Hand.kLeft),
+    		   rightSpeed = Robot.oi.x.getY(Hand.kRight);
+    	
+    	Robot.dt.tankDrive(leftSpeed, rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return false;	// This command should run for as long as the robot is powered on
     }
 
     // Called once after isFinished returns true

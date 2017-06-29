@@ -19,7 +19,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static DriveTrain dt = new DriveTrain();
+	// Declare the subsystems and dependencies
+	public static DriveTrain dt;
 	public static OI oi;
 
 	Command autonomousCommand;
@@ -31,11 +32,16 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		// Initialize the subsystems and dependencies
 		oi = new OI();
-//		chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		dt = new DriveTrain();
+		
 		SmartDashboard.putData("Auto mode", chooser);
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	// After this point, methods should be very short, and only consist of stopping or starting commands //
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -51,7 +57,7 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
+	
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
